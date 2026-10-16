@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>#296 · #298 · #299 · #300 · #302 · #303 · #304 · #305 · #306 · #307 — CMS checklist</title>
+<style>
+  :root { --fg:#1a1a1a; --bg:#fdfdfd; --accent:#0a7d4a; --warn:#b45309; --red:#b91c1c; --muted:#666; --border:#ddd; --code-bg:#f5f5f5; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg:#e4e4e4; --bg:#1a1a1a; --accent:#4ade80; --warn:#fbbf24; --red:#f87171; --muted:#999; --border:#333; --code-bg:#262626; }
+  }
+  * { box-sizing:border-box; }
+  body { font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:var(--fg); background:var(--bg); max-width:980px; margin:1.5em auto; padding:0 1.5em 3em; }
+  h1,h2,h3,h4 { font-weight:600; margin-top:1.6em; line-height:1.3; }
+  h1 { font-size:1.7em; margin-bottom:.2em; }
+  h2 { font-size:1.35em; border-bottom:1px solid var(--border); padding-bottom:.2em; }
+  h3 { font-size:1.1em; }
+  a { color:var(--accent); overflow-wrap:anywhere; }
+  code { background:var(--code-bg); padding:.15em .35em; border-radius:3px; font-size:.92em; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; overflow-wrap:anywhere; }
+  pre { background:var(--code-bg); padding:1em 1.2em; border-radius:6px; overflow-x:auto; font-size:.87em; line-height:1.5; font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  pre code { background:none; padding:0; }
+  .scroll { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; margin:.8em 0; font-size:.93em; }
+  th,td { border:1px solid var(--border); padding:.45em .7em; vertical-align:top; text-align:left; }
+  th { font-weight:600; background:var(--code-bg); }
+  ul { padding-left:1.4em; } li { margin:.25em 0; }
+  .checks { list-style:none; padding-left:0; }
+  .checks li { margin:.45em 0; }
+  .checks label { display:flex; gap:.55em; align-items:flex-start; }
+  .checks input { margin-top:.35em; flex:0 0 auto; }
+  details { margin:.5em 0; } details > summary { cursor:pointer; font-weight:600; padding:.4em 0; }
+  hr { border:none; border-top:1px solid var(--border); margin:2em 0; }
+  .meta { color:var(--muted); font-size:.85em; }
+  .sub { color:var(--muted); font-size:.95em; margin-top:.3em; }
+  .status { background:color-mix(in srgb, var(--accent) 12%, var(--bg)); border:1px solid var(--accent); border-radius:8px; padding:.9em 1.2em; margin:1.2em 0; }
+  .status .badge { display:inline-block; background:var(--accent); color:var(--bg); padding:.1em .6em; border-radius:4px; font-size:.78em; font-weight:600; letter-spacing:.02em; }
+  .status p { margin:.5em 0 0; font-size:.92em; }
+  .next { border:1px solid var(--warn); border-left:4px solid var(--warn); border-radius:8px; padding:.8em 1.2em; margin:1.2em 0; background:color-mix(in srgb, var(--warn) 8%, var(--bg)); }
+  .next > summary { cursor:pointer; font-weight:600; font-size:1.02em; padding:0; }
+  .next > summary .meta { font-weight:400; }
+  .next ol { margin:.5em 0 .1em 1.3em; padding:0; }
+  .next ol li { margin:.3em 0; }
+  .next .who { font-weight:600; }
+  .pill { display:inline-block; font-size:.78em; padding:.1em .55em; border-radius:10px; background:var(--code-bg); color:var(--muted); margin-left:.4em; vertical-align:1px; }
+  .pill.done { background:var(--accent); color:var(--bg); }
+  .pill.now  { background:var(--warn);   color:var(--bg); }
+  .pill.next { background:var(--code-bg); color:var(--fg); border:1px solid var(--border); }
+  .pill.warn { background:var(--red);    color:var(--bg); }
+  .callout { border:1px solid var(--border); border-left:3px solid var(--accent); border-radius:4px; padding:.7em 1em; margin:1em 0; font-size:.93em; background:color-mix(in srgb, var(--accent) 5%, var(--bg)); }
+  .tabbar { display:flex; flex-wrap:wrap; gap:.2em; border-bottom:2px solid var(--border); margin:1.2em 0 1.5em; }
+  .tabbar .tab { padding:.55em 1em; cursor:pointer; border:1px solid transparent; border-bottom:none; border-radius:6px 6px 0 0; font:inherit; font-weight:500; font-size:.95em; color:var(--muted); background:none; margin-bottom:-2px; }
+  .tabbar .tab:hover { color:var(--fg); }
+  .tabbar .tab.active { color:var(--fg); border-color:var(--border); border-bottom:2px solid var(--bg); background:var(--bg); font-weight:600; }
+  .pane { display:none; } .pane.active { display:block; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>#296 · #298 · #299 · #300 · #302 · #303 · #304 · #305 · #306 · #307 — CMS checklist</h1>
+  <div class="sub">
+    <a href="https://github.com/jumpsuitgroup/CMS/pull/296">#296</a>
+    · <a href="https://cms.jumpsuitgroup.com/dashboard">Production dashboard</a>
+    · <a href="https://cms-staging.jumpsuitgroup.com/dashboard">Staging dashboard</a>
+  </div>
+</header>
+
+<div class="status">
+  <span class="badge">SHIPPED · CHECKLIST OPEN</span>
+  <span class="meta" style="float:right">As of 2026-10-16 00:53 UTC</span>
+  <p>Last 10 merged pull requests on <code>jumpsuitgroup/CMS</code> main. All ten are on the live staging and production apps. Walk the checklists below. Checked boxes stay in this browser until the page reloads.</p>
+</div>
+
+<details class="next" open>
+  <summary>Next steps <span class="meta">· 2 items</span></summary>
+  <ol>
+    <li><span class="who">Connor</span> — walk the Workstreams checklists on production, in the numbered order <span class="meta">— confirms each merged pull request on the screens it changed</span></li>
+    <li><span class="who">Connor</span> — open Farm Creek at the <code>preview-</code> address and the staging Acme at the <code>staging-</code> address <span class="meta">— confirms a staging bake cannot replace the production preview</span></li>
+  </ol>
+</details>
+
+<div class="tabbar">
+  <button class="tab active" data-pane="over">1 · Overview</button>
+  <button class="tab" data-pane="work">2 · Workstreams</button>
+  <button class="tab" data-pane="bg">3 · Background</button>
+  <button class="tab" data-pane="plan">4 · Plan</button>
+  <button class="tab" data-pane="risk">5 · Risks &amp; open questions</button>
+  <button class="tab" data-pane="faq">6 · FAQ</button>
+</div>
+
+<main>
+
+  <section class="pane active" id="over">
+    <div class="callout">A click-through checklist for the last 10 pull requests merged to main. The code is already on both apps. These steps are how a person confirms each change on the screen it touches.</div>
+    <h2>Success criteria</h2>
+    <h3>Authors and content</h3>
+    <div class="scroll">
+    <table>
+      <tr><th style="width:160px">Criterion</th><th>Statement</th><th>Check</th><th style="width:110px">Status</th></tr>
+      <tr><td>Author switches</td><td>The Authors list can turn Author and Bio page on or off separately, and a refused save stays on.</td><td>On a client’s Authors screen, flip Bio page. Then try the Default Author and the last Active author.</td><td><span class="pill next">to test</span></td></tr>
+      <tr><td>Coverage guides</td><td>Product pages in Content Schedule can hold a coverage review guide without publishing.</td><td>Open Content Schedule, product pages. Rename or clear a focus. The public site stays as it was.</td><td><span class="pill next">to test</span></td></tr>
+      <tr><td>SEO standards</td><td>Only a Super Admin sees SEO Standards. A stored Page URL wins. Home stays <code>/</code>.</td><td>Open SEO Standards as Super Admin. Open the same address as a client. Check one product path and one stored Page URL.</td><td><span class="pill next">to test</span></td></tr>
+    </table>
+    </div>
+    <h3>Template workspace</h3>
+    <div class="scroll">
+    <table>
+      <tr><th style="width:160px">Criterion</th><th>Statement</th><th>Check</th><th style="width:110px">Status</th></tr>
+      <tr><td>Gallery push</td><td>A Template Gallery save stays on the master until Push to all clients with this template.</td><td>Save a gallery section. An unchecked client’s preview does not change.</td><td><span class="pill next">to test</span></td></tr>
+      <tr><td>Tabs restored</td><td>Template Sections is first and opens the Template Gallery. Then Template Pages, Navigation, Footer.</td><td>Open a client’s Template Workspace and click each tab.</td><td><span class="pill next">to test</span></td></tr>
+      <tr><td>Push result</td><td>A one-page preview uses that page’s sections. A failed push says why and can be retried.</td><td>Preview one page in Template Pages. On Sitemap, read a failed Pending Live row if one exists.</td><td><span class="pill next">to test</span></td></tr>
+    </table>
+    </div>
+    <h3>Preview isolation</h3>
+    <div class="scroll">
+    <table>
+      <tr><th style="width:160px">Criterion</th><th>Statement</th><th>Check</th><th style="width:110px">Status</th></tr>
+      <tr><td>Separate copies</td><td>Production and staging previews of the same slug are different files.</td><td>Farm Creek is on <code>preview-acme-insurance</code>. The Beacon-titled Acme is on <code>staging-acme-insurance</code>.</td><td><span class="pill done">checked 2026-10-16</span></td></tr>
+      <tr><td>Dashboard links</td><td>Production buttons open <code>preview-</code>. Staging buttons open <code>staging-</code>.</td><td>On each dashboard, open a client preview from the page editor or client list and read the address.</td><td><span class="pill now">bundle checked, click still open</span></td></tr>
+    </table>
+    </div>
+    <h2>Out of scope</h2>
+    <ul>
+      <li>Rebaking Evergreen Coast or Gary. Those previews were not replaced by the other database.</li>
+      <li>Changing the Farm Creek service-center tab, which still says Service Center — Beacon Insurance Group because that is the saved title.</li>
+      <li>Merging pull request <a href="https://github.com/jumpsuitgroup/CMS/pull/297">#297</a>. It is still open against <code>Builder-Template-A</code>.</li>
+      <li>Running <code>db:sync</code>, or publishing a client site as part of this checklist.</li>
+    </ul>
+  </section>
+
+  <section class="pane" id="work">
+    <h2>Status</h2>
+    <p class="meta">Numbers are the order to test. A higher first number waits on the stage before it. Items that share a first number can be checked in any order inside that stage. GitHub reported every row MERGED at 2026-10-16 00:53 UTC. That snapshot is not a new merge decision.</p>
+    <div class="scroll">
+    <table>
+      <tr><th style="width:70px">ID</th><th>What</th><th style="width:90px">Owner</th><th style="width:120px">Status</th></tr>
+      <tr><td>1.0</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/296">#296</a> Author and Bio page switches</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+      <tr><td>1.1</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/298">#298</a> Coverage review guides</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+      <tr><td>1.2</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/299">#299</a> SEO standards and product paths</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+      <tr><td>1.3</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/300">#300</a> Template gallery push</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+      <tr><td>2.0</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/302">#302</a> Template edits restored after #300</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+      <tr><td>3.0</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/303">#303</a> Push result on the template editor</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+      <tr><td>4.0</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/304">#304</a> Separate preview folders</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+      <tr><td>5.0</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/305">#305</a> Preview environment types</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+      <tr><td>6.0</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/306">#306</a> Preview settings typecheck</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+      <tr><td>7.0</td><td><a href="https://github.com/jumpsuitgroup/CMS/pull/307">#307</a> Production buttons use preview-</td><td>Connor</td><td><span class="pill done">merged</span></td></tr>
+    </table>
+    </div>
+
+    <hr>
+    <h2>PR 1.0 — <a href="https://github.com/jumpsuitgroup/CMS/pull/296">#296</a> · Author and Bio page switches <span class="pill done">merged</span></h2>
+    <p>The Authors list has an Author switch and a Bio page switch. Each saves only that field. A bio page is served when Show Bio Page is on, even if Author is off. An article does not add a byline for that person. Nothing in this pull request publishes a site.</p>
+    <h3>Pages</h3>
+    <ul>
+      <li>Authors, on the client screen and at <code>/dashboard/tenants/&lt;id&gt;/authors</code></li>
+      <li>The person’s editor, and the Team Roster on Agency Info</li>
+      <li>After the next preview or publish: the public bio address, the team page, and an article</li>
+    </ul>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> Jane shows Author and Bio page on the list without opening her.</label></li>
+      <li><label><input type="checkbox"> Turn Bio page on. The list, her editor, and the Team Roster show it on. Author stays as it was.</label></li>
+      <li><label><input type="checkbox"> Turn Author off for someone who is not the only Active author. Bio page stays on. The site does not publish.</label></li>
+      <li><label><input type="checkbox"> Turn Author off on the Default Author. The switch stays on and the screen says to choose a different Default Author first.</label></li>
+      <li><label><input type="checkbox"> Turn off the last Active Author. The switch stays on and the screen says at least one Active author is required.</label></li>
+      <li><label><input type="checkbox"> After the next preview, an Active person with Bio page on and Author off loads at their bio address. The team card links there. An article does not link their name. They are absent from the author and reviewer pickers.</label></li>
+    </ul>
+
+    <hr>
+    <h2>PR 1.1 — <a href="https://github.com/jumpsuitgroup/CMS/pull/298">#298</a> · Coverage review guides <span class="pill done">merged</span></h2>
+    <p>The product-pages area of Content Schedule can store a coverage review guide, suggestions, and a cleared focus. Creating or renaming a focused page stays in the CMS until someone publishes.</p>
+    <h3>Pages</h3>
+    <ul>
+      <li>Content Schedule, <code>/dashboard/tenants/&lt;id&gt;/content-schedule</code>, product pages tab</li>
+      <li>The page editor for a product page, <code>/dashboard/tenants/&lt;id&gt;/pages/&lt;page id&gt;</code></li>
+    </ul>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> A coverage shows its guide, suggestions, and filters.</label></li>
+      <li><label><input type="checkbox"> Rename a focus, then clear one. The public site does not change.</label></li>
+      <li><label><input type="checkbox"> Create a focused page from the plan. It appears in the CMS and is absent from the live site until the next publish.</label></li>
+    </ul>
+
+    <hr>
+    <h2>PR 1.2 — <a href="https://github.com/jumpsuitgroup/CMS/pull/299">#299</a> · SEO standards and product paths <span class="pill done">merged</span></h2>
+    <p>Super Admin gets SEO Standards in the main menu, after Change Log. A description follows the platform standard, then the client’s saved field, then that page’s own text. Product addresses use the coverage name. A stored Page URL wins. Home stays <code>/</code>. A changed prompt does not rewrite the live sentence until the next preview or publish.</p>
+    <h3>Pages</h3>
+    <ul>
+      <li>SEO Standards, <code>/dashboard/seo-standards</code></li>
+      <li>Client SEO, <code>/dashboard/tenants/&lt;id&gt;/seo</code></li>
+      <li>Page editor, <code>/dashboard/tenants/&lt;id&gt;/pages/&lt;page id&gt;</code></li>
+    </ul>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> As Super Admin, SEO Standards is in the main menu and the screen opens.</label></li>
+      <li><label><input type="checkbox"> As a client, that menu item is absent, and opening the address directly does not show the screen.</label></li>
+      <li><label><input type="checkbox"> Edit a description prompt and Apply. The public page keeps its current sentence.</label></li>
+      <li><label><input type="checkbox"> An audience path looks like <code>/personal/auto-insurance-for-veterinarians/</code>.</label></li>
+      <li><label><input type="checkbox"> A town path looks like <code>/personal/auto-insurance-boston/</code>, with no word “in” and no state.</label></li>
+      <li><label><input type="checkbox"> A page that already has a Page URL keeps that URL. Home is still <code>/</code>.</label></li>
+    </ul>
+
+    <hr>
+    <h2>PR 1.3 — <a href="https://github.com/jumpsuitgroup/CMS/pull/300">#300</a> · Template gallery push <span class="pill done">merged</span></h2>
+    <p>Saving the Template Gallery updates the master only. Clients receive it from Push to all clients with this template. The client menu says Template Workspace. A bake still keeps a stored meta description, a stored Page URL, and Home at <code>/</code>.</p>
+    <h3>Pages</h3>
+    <ul>
+      <li>Design Gallery, <code>/dashboard/design-gallery</code></li>
+      <li>Templates, <code>/dashboard/templates</code></li>
+      <li>Template Workspace, <code>/dashboard/tenants/&lt;id&gt;/global-sections</code></li>
+      <li>Client profile, the page editor, and template preview at <code>/dashboard/template-preview/&lt;template&gt;</code></li>
+    </ul>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> Save a gallery change. An unchecked client keeps its current look.</label></li>
+      <li><label><input type="checkbox"> Push to all clients with this template marks only clients on that template for the next bake.</label></li>
+      <li><label><input type="checkbox"> Home remains <code>/</code>. A page with a stored Page URL keeps it.</label></li>
+      <li><label><input type="checkbox"> A person with Show Bio Page on still has a bio page after the next preview.</label></li>
+    </ul>
+
+    <hr>
+    <h2>PR 2.0 — <a href="https://github.com/jumpsuitgroup/CMS/pull/302">#302</a> · Template edits restored <span class="pill done">merged</span></h2>
+    <p>The #300 merge had dropped template and dashboard edits. This put them back. Template Sections opens the Template Gallery. Tab order is Template Sections, Template Pages, Navigation, Footer. Live still saves as the stage <code>live</code>.</p>
+    <h3>Pages</h3>
+    <ul>
+      <li>Template Workspace, <code>/dashboard/tenants/&lt;id&gt;/global-sections</code></li>
+      <li>Page frame editor, <code>/dashboard/tenants/&lt;id&gt;/design/frame/&lt;page type&gt;</code></li>
+      <li>Section overrides and the hero editor on a page</li>
+      <li>Client list status menu, Media Library, and Change Log</li>
+    </ul>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> Template Sections is the first tab and shows the Template Gallery.</label></li>
+      <li><label><input type="checkbox"> Template Pages still opens page layouts.</label></li>
+      <li><label><input type="checkbox"> Navigation and Footer still open.</label></li>
+      <li><label><input type="checkbox"> Change a section in the gallery and save. A client site does not change until Push to all clients with this template.</label></li>
+      <li><label><input type="checkbox"> The client list still saves Live as the stage <code>live</code>.</label></li>
+    </ul>
+
+    <hr>
+    <h2>PR 3.0 — <a href="https://github.com/jumpsuitgroup/CMS/pull/303">#303</a> · Push result on the template editor <span class="pill done">merged</span></h2>
+    <p>A one-page Template Pages preview uses that page’s own sections. The preview title stays the agency coverage or the office city. Pending Live can show why a push failed and offer a retry. Pull request #301 was closed. Its work landed here.</p>
+    <h3>Pages</h3>
+    <ul>
+      <li>Template Workspace, <code>/dashboard/tenants/&lt;id&gt;/global-sections</code></li>
+      <li>Pending Live, on that client’s Sitemap screen, <code>/dashboard/tenants/&lt;id&gt;/sitemap</code></li>
+    </ul>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> Open Template Pages, pick one page, and change a section. The preview shows that page’s sections.</label></li>
+      <li><label><input type="checkbox"> The preview title is still the coverage or the office city.</label></li>
+      <li><label><input type="checkbox"> On Pending Live, a failed push shows the reason and a retry.</label></li>
+      <li><label><input type="checkbox"> Saving does not publish the public site.</label></li>
+    </ul>
+
+    <hr>
+    <h2>PR 4.0 — <a href="https://github.com/jumpsuitgroup/CMS/pull/304">#304</a> · Separate preview folders <span class="pill done">merged</span></h2>
+    <p>A staging bake of a client can no longer replace that client’s production preview. Production files and staging files live in different folders. Nginx sends <code>preview-</code> to the production app and <code>staging-</code> to the staging app.</p>
+    <h3>Pages</h3>
+    <ul>
+      <li><a href="https://preview-acme-insurance.cms.jumpsuitgroup.com/">preview-acme-insurance</a></li>
+      <li><a href="https://staging-acme-insurance.cms.jumpsuitgroup.com/">staging-acme-insurance</a></li>
+      <li><a href="https://preview-steve-white-insurance-group.cms.jumpsuitgroup.com/">preview-steve-white-insurance-group</a></li>
+      <li><a href="https://staging-helton-insurance-group.cms.jumpsuitgroup.com/">staging-helton-insurance-group</a></li>
+    </ul>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> Production Acme is titled Home | Farm Creek Insurance and includes the Vertafore login.</label></li>
+      <li><label><input type="checkbox"> Staging Acme is titled Beacon Insurance Group — Independent Insurance Agency.</label></li>
+      <li><label><input type="checkbox"> Steve White still opens on its <code>preview-</code> address.</label></li>
+      <li><label><input type="checkbox"> Helton still opens on its <code>staging-</code> address.</label></li>
+      <li><label><input type="checkbox"> A later staging preview bake of a staging-only client leaves the production <code>preview-</code> address for a different client unchanged.</label></li>
+    </ul>
+
+    <hr>
+    <h2>PR 5.0 — <a href="https://github.com/jumpsuitgroup/CMS/pull/305">#305</a> · Preview environment types <span class="pill done">merged</span></h2>
+    <p>A build-only fix so the preview split typechecks. #306 replaced the approach. No screen changed.</p>
+    <h3>Pages</h3>
+    <p>No new screen. Use the production and staging login pages, then the two Acme addresses from 4.0.</p>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> <a href="https://cms.jumpsuitgroup.com/admin/login/">Production login</a> loads.</label></li>
+      <li><label><input type="checkbox"> <a href="https://cms-staging.jumpsuitgroup.com/admin/login/">Staging login</a> loads.</label></li>
+      <li><label><input type="checkbox"> The two Acme addresses still show different sites.</label></li>
+    </ul>
+
+    <hr>
+    <h2>PR 6.0 — <a href="https://github.com/jumpsuitgroup/CMS/pull/306">#306</a> · Preview settings typecheck <span class="pill done">merged</span></h2>
+    <p>The follow-up that let the production build finish. No screen changed. If 5.0’s three checks pass, this one has passed too.</p>
+    <h3>Pages</h3>
+    <p>Same screens as 5.0.</p>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> Both login pages load and the two Acme addresses still differ.</label></li>
+    </ul>
+
+    <hr>
+    <h2>PR 7.0 — <a href="https://github.com/jumpsuitgroup/CMS/pull/307">#307</a> · Production buttons use preview- <span class="pill done">merged</span></h2>
+    <p>Production dashboard buttons now open <code>preview-&lt;slug&gt;.cms.jumpsuitgroup.com</code>. Staging buttons stay on <code>staging-</code>. The built button code was checked on 2026-10-15. A signed-in click is still the human check.</p>
+    <h3>Pages</h3>
+    <ul>
+      <li>Production client list and a page in the page editor, anywhere an Open preview link appears</li>
+      <li>The same links on the staging dashboard</li>
+    </ul>
+    <h3>Checklist</h3>
+    <ul class="checks">
+      <li><label><input type="checkbox"> On production, open a client preview. The address starts with <code>preview-</code>.</label></li>
+      <li><label><input type="checkbox"> Farm Creek at <a href="https://preview-acme-insurance.cms.jumpsuitgroup.com/">preview-acme-insurance</a> is titled Home | Farm Creek Insurance.</label></li>
+      <li><label><input type="checkbox"> On staging, the same kind of link still starts with <code>staging-</code>.</label></li>
+    </ul>
+
+    <h2 id="merge">Merging into main</h2>
+    <p>For the developer merging, and for the coding agent doing the check. Run this at merge time. This page does not know whether main has moved since it was published. Do not merge, rebase, or push until the developer has seen the results. Do not use a dirty checkout. Use a temporary worktree.</p>
+    <ol>
+      <li><b>Fetch and measure.</b> <code>git fetch origin</code>. If this pull request does not target main, say so, and still compare the branch to main. <code>git rev-list --left-right --count origin/main...&lt;head&gt;</code>. The left number is commits on main that this branch does not contain. Trust this count, not a number printed on an older copy of this page.</li>
+      <li><b>Textual conflicts.</b> <code>git merge-tree --write-tree origin/main &lt;head&gt;</code>. List the files. Note both-sides edits, modify/delete, rename/edit, rename/rename, binaries, and submodule SHA disagreements. GitHub <code>mergeable: MERGEABLE</code> only means git can produce a tree.</li>
+      <li><b>Clean merge that still breaks.</b> When the dry run is clean and main is ahead, read the combined tree. Any of these is a break even though git stayed silent:
+      <ul>
+        <li>A symbol, export, type, route, or config key removed or renamed on one side and still used on the other.</li>
+        <li>Two schema or migration edits that both apply: the same column, the same migration id, an enum value, or a constraint rewritten on both sides. Read order-sensitive files (migrations, route tables, version bumps) in the combined result.</li>
+        <li>A lockfile or package manifest changed on both sides. A clean lockfile merge can still not match the manifests.</li>
+        <li>Generated code merged without being regenerated.</li>
+        <li>Tests or fixtures changed on main in a way this branch's assertions no longer match.</li>
+        <li>The same user-facing flow changed in different files, caller on one side and callee on the other.</li>
+        <li>This branch repeats commits already squashed onto main.</li>
+      </ul></li>
+      <li><b>Checks on the combined tree.</b> Required CI on the pull request ran against an older main when main is ahead. Advisory bot failures are not blockers. A required check that has not run on the combined tree is. Run <code>npx tsc --noEmit</code> and <code>npx vitest run</code> on the combined tree before merging.</li>
+      <li><b>Show, then merge.</b> Tell the developer how many commits main is ahead, the conflict files, any silent breaker, and whether CI is stale. Merge only after they agree. Then bring current main into the branch, re-run the checks, and merge into main.</li>
+    </ol>
+  </section>
+
+  <section class="pane" id="bg">
+    <div class="callout">The last four pull requests exist because staging and production were sharing one preview folder.</div>
+    <h2>What changed on 14 October</h2>
+    <p>Acme exists in both databases as <code>acme-insurance</code>. Both apps copied previews into <code>/var/www/staging/&lt;slug&gt;/</code>, and every <code>staging-&lt;slug&gt;</code> address opened the staging app. The production Farm Creek bake finished at 12:53 UTC. Two minutes later the staging bake of the same slug replaced that folder. The production database rows were still there. Yesterday’s code deploys did not rewrite the HTML.</p>
+    <h2>Key ideas</h2>
+    <ul>
+      <li><b>preview-</b> is the production copy. Example: <a href="https://preview-acme-insurance.cms.jumpsuitgroup.com/">Farm Creek</a>.</li>
+      <li><b>staging-</b> is the staging copy. For Acme, that is the older site titled Beacon Insurance Group.</li>
+      <li>A later bake replaces only that environment’s own copy of that slug.</li>
+      <li>Pull requests #305 and #306 changed no screen. They let the preview split compile. #307 makes the production buttons use the <code>preview-</code> name.</li>
+    </ul>
+  </section>
+
+  <section class="pane" id="plan">
+    <h2>Approach</h2>
+    <p>Test on the production dashboard unless a step names staging. Content edits in #296, #298, #299, #300, #302, and #303 stay in the CMS until a person runs a preview or publish. The preview addresses in #304 and #307 are already live, so those checks can be done by opening the URLs.</p>
+    <h2>Phases</h2>
+    <div class="scroll">
+    <table>
+      <tr><th>Phase</th><th>Goal</th><th>Depends on</th></tr>
+      <tr><td>1.0–1.3</td><td>Authors, coverage guides, SEO standards, and the template gallery push. Any order inside this phase.</td><td>—</td></tr>
+      <tr><td>2.0</td><td>Confirm the restored Template Workspace tabs.</td><td>1.3</td></tr>
+      <tr><td>3.0</td><td>Confirm one-page preview and a failed-push message.</td><td>2.0</td></tr>
+      <tr><td>4.0–7.0</td><td>Confirm the two Acme addresses, then the production preview button.</td><td>The apps already have this code</td></tr>
+    </table>
+    </div>
+  </section>
+
+  <section class="pane" id="risk">
+    <h2>Risks</h2>
+    <div class="scroll">
+    <table>
+      <tr><th>Risk</th><th style="width:140px">Likelihood / impact</th><th>Mitigation</th><th style="width:110px">Owner</th></tr>
+      <tr><td>Someone opens the old <code>staging-acme-insurance</code> address and thinks Farm Creek was replaced again.</td><td>Likely / confusing</td><td>Use <code>preview-acme-insurance</code> for the production copy. The staging address is the other database on purpose.</td><td>Connor</td></tr>
+      <tr><td>The Farm Creek service-center tab still says Beacon.</td><td>Already true / low</td><td>That is the title saved on the production page. This checklist does not change it.</td><td>Connor</td></tr>
+      <tr><td>Evergreen Coast is an August preview. Gary’s newer save is not in its preview.</td><td>Already true / low</td><td>Those were not part of the shared-folder overwrite. Rebake them only as a separate request.</td><td>Connor</td></tr>
+      <tr><td>A future edit reads the preview host name off another object, and production buttons go back to <code>staging-</code>.</td><td>Low / high</td><td>#307 locks the direct <code>process.env</code> read with a test. Re-check a production preview link after any preview-helper change.</td><td>Whoever merges that change</td></tr>
+    </table>
+    </div>
+    <h4 style="color:var(--red)">The honest caveat</h4>
+    <p>The two Acme addresses were opened and compared on 2026-10-16. The production button code was read from the built app. Nobody has yet clicked Open preview while signed in. That click is still on the #307 checklist.</p>
+    <h2>Open questions</h2>
+    <ul>
+      <li>Whether to rebake Evergreen Coast and Gary. Not decided. Leave them until someone asks.</li>
+      <li>Whether to retitle the Farm Creek service-center page. The saved title is still the Beacon wording.</li>
+    </ul>
+  </section>
+
+  <section class="pane" id="faq">
+    <h3>Will a staging bake replace a production preview again?</h3>
+    <p>No, not through the normal publish path. Each app writes its own folder and refuses the old shared folder. Nginx sends each hostname to the matching app. A bake still replaces that environment’s own previous preview of the same slug.</p>
+    <h3>Why does staging-acme look like Beacon?</h3>
+    <p>That address now shows the staging database’s older Acme. Production Farm Creek is at <a href="https://preview-acme-insurance.cms.jumpsuitgroup.com/">preview-acme-insurance</a>.</p>
+    <h3>Why does the service-center tab still say Beacon?</h3>
+    <p>That title is what is saved on the production service-center page. Restoring the preview files did not rewrite the saved title.</p>
+    <h3>What does done look like?</h3>
+    <p>Each box on the Workstreams tab has been checked on the named screen, the production preview link starts with <code>preview-</code>, and the two Acme addresses still show different sites.</p>
+  </section>
+
+</main>
+
+<script type="application/json" id="artifact-state">
+{"as_of":"2026-10-16 00:53 UTC","workstreams":[
+{"repo":"jumpsuitgroup/CMS","number":296,"workstream":"1.0","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"1.0","status":"merged","owner":"Connor"},
+{"repo":"jumpsuitgroup/CMS","number":298,"workstream":"1.1","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"1.1","status":"merged","owner":"Connor"},
+{"repo":"jumpsuitgroup/CMS","number":299,"workstream":"1.2","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"1.2","status":"merged","owner":"Connor"},
+{"repo":"jumpsuitgroup/CMS","number":300,"workstream":"1.3","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"1.3","status":"merged","owner":"Connor"},
+{"repo":"jumpsuitgroup/CMS","number":302,"workstream":"2.0","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"2.0","status":"merged","owner":"Connor"},
+{"repo":"jumpsuitgroup/CMS","number":303,"workstream":"3.0","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"3.0","status":"merged","owner":"Connor"},
+{"repo":"jumpsuitgroup/CMS","number":304,"workstream":"4.0","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"4.0","status":"merged","owner":"Connor"},
+{"repo":"jumpsuitgroup/CMS","number":305,"workstream":"5.0","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"5.0","status":"merged","owner":"Connor"},
+{"repo":"jumpsuitgroup/CMS","number":306,"workstream":"6.0","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"6.0","status":"merged","owner":"Connor"},
+{"repo":"jumpsuitgroup/CMS","number":307,"workstream":"7.0","draft":false,"ci":"not fetched","unresolved":null,"state":"MERGED","id":"7.0","status":"merged","owner":"Connor"}
+]}
+</script>
+
+<script>
+function goTab(id){
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.pane === id));
+  document.querySelectorAll('.pane').forEach(p => p.classList.toggle('active', p.id === id));
+}
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => goTab(t.dataset.pane)));
+</script>
+
+</body>
+</html>
